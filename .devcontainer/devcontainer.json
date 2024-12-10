@@ -1,0 +1,25 @@
+{
+	"name": "Python 3",
+
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "bash",
+		"python.defaultInterpreterPath": "/usr/local/bin/python"
+	},
+	"extensions": [
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"eamodio.gitlens",
+		"ms-azuretools.vscode-docker",
+		"adam-bender.commit-message-editor",
+		"mhutchie.git-graph"
+	],
+	"postCreateCommand": "pip install --upgrade pip && pip install poetry || true",
+	"runArgs": [
+		"--name=RPG-Sheet-Automate"
+	],
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
+}
