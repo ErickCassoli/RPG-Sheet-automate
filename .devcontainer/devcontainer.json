@@ -1,6 +1,5 @@
 {
 	"name": "Python 3",
-
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
@@ -11,14 +10,15 @@
 	"extensions": [
 		"ms-python.python",
 		"ms-python.vscode-pylance",
-		"eamodio.gitlens",
 		"ms-azuretools.vscode-docker",
 		"adam-bender.commit-message-editor",
-		"mhutchie.git-graph"
+		"mhutchie.git-graph",
+		"mongodb.mongodb-vscode"
 	],
 	"postCreateCommand": "pip install --upgrade pip && pip install poetry || true",
 	"runArgs": [
-		"--name=RPG-Sheet-Automate"
+		"--name=RPG-Sheet-Automate",
+		"--network=rpg_network"
 	],
 	"workspaceFolder": "/workspace",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
