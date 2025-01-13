@@ -8,7 +8,7 @@ collection.create_index("nome", unique=True)
 
 
 
-origem = {
+origem1 = {
     "nome": "Academico",
     "pericias": ["ciencias","investigacao"],
     "habilidade": {
@@ -579,7 +579,7 @@ origem57 = {
     }
 }
 
-origens = [origem, origem2, origem3, origem4, origem5, origem6, origem7, origem8, origem9, origem9, origem10, origem11, origem12, origem13, origem14, origem15, origem16, origem17, origem18, origem19, origem20, origem21, origem22, origem23, origem24, origem25, origem26, origem27, origem28, origem29, origem30, origem31, origem32, origem33, origem34, origem35, origem36, origem37, origem38, origem39, origem40, origem41, origem42, origem43, origem44, origem45, origem46, origem47, origem48, origem49, origem50, origem51, origem52, origem53, origem54, origem55, origem56, origem57]
+origens = [origem1, origem2, origem3, origem4, origem5, origem6, origem7, origem8, origem9, origem9, origem10, origem11, origem12, origem13, origem14, origem15, origem16, origem17, origem18, origem19, origem20, origem21, origem22, origem23, origem24, origem25, origem26, origem27, origem28, origem29, origem30, origem31, origem32, origem33, origem34, origem35, origem36, origem37, origem38, origem39, origem40, origem41, origem42, origem43, origem44, origem45, origem46, origem47, origem48, origem49, origem50, origem51, origem52, origem53, origem54, origem55, origem56, origem57]
 
 def gerar_id():
     # Opção 1: Utilizando UUIDs
@@ -596,9 +596,3 @@ for origem in origens:
     except Exception as e:
         print(f"Erro ao inserir documento: {e}")
 
-for origem in origens:
-    try:
-        result = collection.insert_one(origem)
-        print(f"Documento {origem['nome']} inserido com sucesso!")
-    except client.errors.DuplicateKeyError:
-        print(f"Já existe uma origem com o nome {origem['nome']}.")
