@@ -1,58 +1,50 @@
-from pydantic import BaseModel, model_validator
-from typing import Optional
-from enum import Enum
+from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
+from app.schemas.character_schema import Character
+from app.services.pdf_service import preencher_ficha
+from typing import List
+import uuid
+from pathlib import Path
+
+router = APIRouter()
+
+# Banco de dados simulado
+characters_db = []
 
 
-#Enum para "origem"
-class Origem(str, Enum):
-    agente_saude = "Agente De Saúde"
-    amigo_dos_animais = "Amigo Dos Animais"
-    aminesico = "Aminésico"
-    artista = "Artista"
+# Criar personagem e preencher ficha
+@router.post("/", response_model=Character, status_code=201)
+def create_character(character: Character):
+    # Gera um ID único
+    new_character = character.model_dump()
+    new_character["id"] = str(uuid.uuid4())
+    characters_db.append(new_character)
+
+    # Preenche o PDF
+    preencher_ficha(new_character)
+
+    return new_character
 
 
-#Enum para "classe"
-class Classe(str, Enum):
-    combatente = "Combatente"
-    especialista = "Especialista"
-    ocultista = "Ocultista"
-    sobrevivente = "Sobrevivente"
+# Listar personagens
+@router.get("/", response_model=List[Character])
+def list_characters():
+    return characters_db
 
 
-#Modelo principal do Personagem
-class Character(BaseModel):
-    personagem: str
-    jogador: str
-    origem: Origem
-    classe: Classe
-    nex: Optional[int] = None
-    nivel_nex: Optional[int] = None
-    patente: Optional[str] = None
-    pv: int
-    pe: Optional[int] = None
-    pd: Optional[int] = None
-    san: Optional[int] = None
-    deslocamento: int
-    equip: Optional[int] = None
-    outros: Optional[int] = None
-    protecao: int
-    resistencia: int
-    atributos: dict
+# Baixar ficha em PDF
+@router.get("/{nome_personagem}/download")
+def download_character_sheet(nome_personagem: str):
+    # Caminho do PDF preenchido
+    output_path = Path(__file__).parent.parent.parent.parent / "outputs" / f"{nome_personagem}_Ficha.pdf"
 
-    # Validação com model_validator
-    @model_validator(mode='after')
-    def valida_escolhas(self):
-        # Validação para NEX, nível/NEX e patente
-        opcoes_nex = [self.nex, self.nivel_nex, self.patente]
-        if sum(1 for opcao in opcoes_nex if opcao is not None) != 1:
-            raise ValueError("Escolha apenas uma opção entre NEX, nível/NEX e patente.")
+    # Verifica se o arquivo existe
+    if not output_path.exists():
+        raise HTTPException(status_code=404, detail="Ficha não encontrada.")
 
-        # Validação para PE e SAN ou PD
-        if self.pd is not None and (self.pe is not None or self.san is not None):
-            raise ValueError("Se PD for escolhido, PE e SAN não podem ser preenchidos.")
-        if self.pe is not None and self.san is None:
-            raise ValueError("Se PE for escolhido, SAN também deve ser informado.")
-        if self.pd is None and self.pe is None and self.san is None:
-            raise ValueError("Escolha entre PE e SAN ou apenas PD.")
-
-        return self
+    # Retorna o arquivo para download
+    return FileResponse(
+        path=str(output_path),
+        filename=f"{nome_personagem}_Ficha.pdf",
+        media_type="application/pdf"
+    )
