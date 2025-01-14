@@ -5,11 +5,63 @@ from enum import Enum
 
 # Enum para "origem"
 class Origem(str, Enum):
-    agente_saude = "Agente De Saúde"
-    amigo_dos_animais = "Amigo Dos Animais"
-    aminesico = "Aminésico"
+    academico = "Acadêmico"
+    agente_de_saude = "Agente De Saúde"
+    amnesico = "Amnésico"
     artista = "Artista"
-
+    atleta = "Atleta"
+    chef = "Chef"
+    criminoso = "Criminoso"
+    cultista_arrependido = "Cultista Arrependido"
+    desgarrado = "Desgarrado"
+    engenheiro = "Engenheiro"
+    executivo = "Executivo"
+    investigador = "Investigador"
+    lutador = "Lutador"
+    magnata = "Magnata"
+    mercenario = "Mercenário"
+    militar = "Militar"
+    operario = "Operário"
+    policial = "Policial"
+    religioso = "Religioso"
+    servidor_publico = "Servidor Público"
+    teorico_da_conspiracao = "Teórico Da Conspiração"
+    ti = "T.I."
+    trabalhador_rural = "Trabalhador Rural"
+    trambiqueiro = "Trambiqueiro"
+    universitario = "Universitário"
+    vitima = "Vítima"
+    amigo_dos_animais = "Amigo dos Animais"
+    astronauta = "Astronauta"
+    chef_do_outro_lado = "Chef do Outro Lado"
+    colegial = "Colegial"
+    cosplayer = "Cosplayer"
+    diplomata = "Diplomata"
+    explorador = "Explorador"
+    experimento = "Experimento"
+    fanatico_por_criaturas = "Fanático por Criaturas"
+    fotografo = "Fotógrafo"
+    inventor_paranormal = "Inventor Paranormal"
+    jovem_mistico = "Jovem Místico"
+    legista_do_turno_da_noite = "Legista do Turno da Noite"
+    mateiro = "Mateiro"
+    mergulhador = "Mergulhador"
+    motorista = "Motorista"
+    nerd_entusiasta = "Nerd Entusiasta"
+    profetizado = "Profetizado"
+    psicologo = "Psicólogo"
+    reporter_investigativo = "Repórter Investigativo"
+    ginasta = "Ginasta"
+    jornalista = "Jornalista"
+    professor = "Professor"
+    escritor = "Escritor"
+    body_builder = "Body Builder"
+    personal_trainer = "Personal Trainer"
+    revoltado = "Revoltado"
+    duble = "Dublê"
+    gauderio_abutre = "Gaudério Abutre"
+    blaster = "Blaster"
+    cientista_forense = "Ciêntista Forense"
 
 # Enum para "classe"
 class Classe(str, Enum):
@@ -28,10 +80,6 @@ class Character(BaseModel):
     nex: Optional[int] = None
     nivel_nex: Optional[int] = None
     patente: Optional[str] = None
-    pv: int
-    pe: Optional[int] = None
-    pd: Optional[int] = None
-    san: Optional[int] = None
     deslocamento: int
     equip: Optional[int] = None
     outros: Optional[int] = None

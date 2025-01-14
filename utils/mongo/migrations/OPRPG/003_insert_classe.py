@@ -11,6 +11,7 @@ classe1 = {
     "pv": 20,
     "pe": 2,
     "san": 12,
+    "pd": 6,
     "proeficiencias": "Armas simples, armas táticas e proteções leves.",
     "habilidades": {
         "nome": "Ataque Especial",
@@ -24,6 +25,7 @@ classe2 = {
     "pv": 16,
     "pe": 3,
     "san": 16,
+    "pd": 8,
     "proeficiencias": "Armas simples e proteções leves.",
     "habilidades": [
         {
@@ -46,6 +48,7 @@ classe3 = {
     "pv": 12,
     "pe": 4,
     "san": 20,
+    "pd": 10,
     "proeficiencias": "Armas simples.",
     "habilidades": [{
         "nome": "Escolhido Pelo Outro Lado",
@@ -59,6 +62,7 @@ classe4 = {
     "pv": 8,
     "pe": 2,
     "san": 8,
+    "pd": 4,
     "proeficiencias": "Armas simples.",
     "habilidades": [{
         "nome": "Empenho",
